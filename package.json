@@ -1,0 +1,17 @@
+{
+  "name": "rest-countries-api",
+  "version": "1.0.0",
+  "description": "Frontend Challenge 7",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind": "tailwindcss -i ./styles/input.css -o ./styles/output.css --minify --watch"
+  },
+  "author": "Po-Cheng Yeh",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tailwindcss": "^3.3.3"
+  }
+}

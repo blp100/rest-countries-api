@@ -4,11 +4,176 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png" />
     <link href="/styles/output.css" rel="stylesheet" />
+    <script src="/index.js"></script>
   </head>
-  <body class="bg-zinc-900">
-    <div class="flex min-h-screen items-center">
-      <h1 class="mx-auto text-center text-3xl text-zinc-200">Hello World!</h1>
-    </div>
+  <body class="bg-slate-100">
+    <header class="flex h-20 items-center bg-white px-20 drop-shadow-sm">
+      <h1 class="text-2xl font-semibold text-zinc-900">Where in the world?</h1>
+      <div class="flex-1"></div>
+      <button type="button">Dark Mode</button>
+    </header>
+    <nav class="mx-auto flex items-center px-20 py-12">
+      <form>
+        <label
+          for="default-search"
+          class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >Search</label
+        >
+        <div class="relative">
+          <div
+            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"
+          >
+            <svg
+              class="h-4 w-4 text-zinc-400"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </div>
+          <input
+            type="search"
+            id="default-search"
+            class="block rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 md:w-[30rem]"
+            placeholder="Search for a country…"
+            required
+          />
+        </div>
+      </form>
+      <div class="flex-1"></div>
+      <div class="mx-auto w-64 text-right">
+        <div class="relative inline-block text-left">
+          <div>
+            <button
+              type="button"
+              class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+              id="menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
+              onclick="toggleDropDown()"
+            >
+              Filter by Region
+              <svg
+                class="-mr-1 h-5 w-5 text-gray-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="absolute right-0 z-10 mt-2 w-56 origin-top-right transform rounded-md bg-white opacity-0 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            aria-expanded="false"
+            tabindex="-1"
+            id="dropdown"
+          >
+            <div class="py-1" role="none">
+              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+                >Africa</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-1"
+                >America</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-2"
+                >Asia</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-3"
+                >Europe</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-4"
+                >Others</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section
+      class="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,_[row-start]_264px_[row-end])] justify-center gap-4"
+    >
+      <div class="h-[336px] w-full overflow-hidden rounded bg-white">
+        <div
+          class="h-2/5 w-full items-center bg-contain bg-center bg-no-repeat p-2 hover:bg-contain md:bg-cover"
+          style="background-image: url(https://flagcdn.com/cm.svg)"
+        >
+          <!-- <img
+            class="m-auto max-h-full max-w-full rounded"
+            src="https://flagcdn.com/cm.svg"
+            alt="test"
+          /> -->
+        </div>
+        <div class="p-6">
+          <h2 class="text-lg font-semibold">American Samoa</h2>
+        </div>
+      </div>
+      <div class="h-[336px] w-full overflow-hidden rounded bg-white">
+        <div
+          class="h-2/5 w-full items-center bg-contain bg-center bg-no-repeat p-2 hover:bg-contain md:bg-cover"
+          style="background-image: url(https://flagcdn.com/as.svg)"
+        ></div>
+        <div class="p-6">
+          <h2 class="text-lg font-semibold">American Samoa</h2>
+          <div class="mt-4 flex flex-col gap-2 text-sm">
+            <div class="font-light">
+              <span class="mr-1 font-medium">Population:</span>323,947,000
+            </div>
+            <div class="font-light">
+              <span class="mr-1 font-medium">Region:</span>Americas
+            </div>
+            <div class="font-light">
+              <span class="mr-1 font-medium">Capital:</span>Washington, D.C.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="h-[336px] w-full rounded bg-white">3</div>
+      <div class="h-[336px] w-full rounded bg-white">4</div>
+      <div class="h-[336px] w-full rounded bg-white">5</div>
+    </section>
   </body>
 </html>

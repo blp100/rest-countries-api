@@ -4,6 +4,7 @@ const apiFetchList = {
   searchAll: "all",
   searchByName: "name/",
   searchByRegion: "region/",
+  shortQueryFileds: "?fields=flags,name,population,region,capital",
 };
 
 function removeAllChildNodes(parent) {
@@ -18,6 +19,7 @@ const getapi = async (url) => {
 
   // Storing data in form of JSON
   var data = await response.json();
+  console.log(data);
   if (response) {
     // hideloader();
   }
@@ -96,7 +98,7 @@ const showData = (countries) => {
       } else if (deatilTitle === "Region") {
         paragraph.innerHTML += region;
       } else if (deatilTitle === "Capital") {
-          paragraph.innerHTML += (capital != undefined)? capital[0]: "N/A";
+        paragraph.innerHTML += capital != undefined ? capital[0] : "N/A";
       }
 
       countryDetailDiv.appendChild(paragraph);
@@ -130,13 +132,37 @@ const showData = (countries) => {
   //   </div>
   // </div>
 };
-getapi(api_url + apiFetchList.searchByName + "amer");
+getapi(
+  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds,
+);
 
 // the class name data on dropdown list toggle
 const dropDownClassList = {
-  expandedClass: ["ease-out", "duration-100", "opacity-100", "scale-100", "z-10"],
+  expandedClass: [
+    "ease-out",
+    "duration-100",
+    "opacity-100",
+    "scale-100",
+    "z-10",
+  ],
   unexpandedClass: ["ease-in", "duration-75", "opacity-0", "scale-95", "-z-10"],
 };
+
+// Seatch Bar
+const queryCountries = (e) => {
+  const searchCountriesName = e.target.value;
+  if (searchCountriesName !== "") {
+    getapi(
+      api_url +
+        apiFetchList.searchByName +
+        searchCountriesName +
+        apiFetchList.shortQueryFileds,
+    );
+  }
+};
+
+const searchBar = document.getElementById("search-bar");
+searchBar.addEventListener("input", queryCountries);
 
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
@@ -153,25 +179,35 @@ const toggleDropDown = () => {
   }
 };
 
-// Seatch Bar
-
-const searchCountries = (e) => {
-  const searchCountriesName = e.target.value;
-  if (searchCountriesName !== "") {
-    console.log(searchCountriesName);
-    getapi(api_url + apiFetchList.searchByName + searchCountriesName);
+// Region Menu Items
+const queryRegion = (e) => {
+  const regionName = e.target.innerText;
+  if (regionName !== "Others") {
+    getapi(
+      api_url +
+        apiFetchList.searchByRegion +
+        regionName +
+        apiFetchList.shortQueryFileds,
+    );
+  } else {
+    getapi(
+      api_url +
+        apiFetchList.searchByRegion +
+        "Oceania" +
+        apiFetchList.shortQueryFileds,
+    );
   }
+  toggleDropDown();
 };
 
-const searchBar= document
-  .getElementById("search-bar")
-  .addEventListener("input", searchCountries);
-
-// const menutItems = document.querySelectorAll('[role="menuitem"]');
-// console.log(menutItems);
+const menutItems = document.querySelectorAll('[role="menuitem"]');
+menutItems.forEach((item) => {
+  item.addEventListener("click", queryRegion);
+});
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
+  console.log(event.target);
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;

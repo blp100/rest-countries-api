@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png" />
     <link href="/styles/output.css" rel="stylesheet" />
-    <script src="/index.js"></script>
+    <script src="/index.js" defer></script>
   </head>
   <body class="bg-slate-100">
     <header class="flex h-20 items-center bg-white px-20 drop-shadow-sm">
@@ -43,7 +43,7 @@
           </div>
           <input
             type="search"
-            id="default-search"
+            id="search-bar"
             class="block rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 md:w-[30rem]"
             placeholder="Search for a country…"
             required
@@ -78,7 +78,7 @@
             </button>
           </div>
           <div
-            class="absolute right-0 z-10 mt-2 w-56 origin-top-right transform rounded-md bg-white opacity-0 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
+            class="absolute right-0 -z-10 mt-2 w-56 origin-top-right transform rounded-md bg-white opacity-0 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
@@ -88,46 +88,51 @@
           >
             <div class="py-1" role="none">
               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-              <a
-                href="#"
+              <button
+                type="button"
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-0"
-                >Africa</a
               >
-              <a
-                href="#"
+                Africa
+              </button>
+              <button
+                type="button"
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-1"
-                >America</a
               >
-              <a
-                href="#"
+                America
+              </button>
+              <button
+                type="button"
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-2"
-                >Asia</a
               >
-              <a
-                href="#"
+                Asia
+              </button>
+              <button
+                type="button"
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-3"
-                >Europe</a
               >
-              <a
-                href="#"
+                Europe
+              </button>
+              <button
+                type="button"
                 class="block px-4 py-2 text-sm text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-4"
-                >Others</a
               >
+                Others
+              </button>
             </div>
           </div>
         </div>
@@ -135,7 +140,7 @@
     </nav>
     <section
       class="mx-auto grid max-w-7xl grid-cols-[repeat(auto-fit,_[row-start]_264px_[row-end])] justify-center gap-4"
-      id="countryList"
+      id="country-list"
     >
       <!-- <div class="h-[336px] w-full overflow-hidden rounded bg-white">
         <div

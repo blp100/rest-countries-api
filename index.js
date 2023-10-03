@@ -6,6 +6,12 @@ const apiFetchList = {
   searchByRegion: "region/",
 };
 
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
 const getapi = async (url) => {
   // Storing response
   const response = await fetch(url);
@@ -23,7 +29,8 @@ function hideloader() {
 }
 // Function to define innerHTML for HTML table
 const showData = (countries) => {
-  const countryList = document.getElementById("countryList");
+  const countryList = document.getElementById("country-list");
+  removeAllChildNodes(countryList);
 
   countries.map((country) => {
     const { flags, name, population, region, capital } = country;
@@ -85,11 +92,11 @@ const showData = (countries) => {
       paragraph.appendChild(span);
 
       if (deatilTitle === "Population") {
-        paragraph.innerHTML += population;
+        paragraph.innerHTML += population.toLocaleString("en-US");
       } else if (deatilTitle === "Region") {
         paragraph.innerHTML += region;
       } else if (deatilTitle === "Capital") {
-        paragraph.innerHTML += capital[0];
+          paragraph.innerHTML += (capital != undefined)? capital[0]: "N/A";
       }
 
       countryDetailDiv.appendChild(paragraph);
@@ -100,9 +107,8 @@ const showData = (countries) => {
     div.append(descriptionDiv);
   });
 
-
   /* the country list boilplate */
-  
+
   // <div class="h-[336px] w-full overflow-hidden rounded bg-white">
   //   <div
   //     class="h-2/5 w-full items-center bg-contain bg-center bg-no-repeat p-2 hover:bg-contain md:bg-cover"
@@ -128,8 +134,8 @@ getapi(api_url + apiFetchList.searchByName + "amer");
 
 // the class name data on dropdown list toggle
 const dropDownClassList = {
-  expandedClass: ["ease-out", "duration-100", "opacity-100", "scale-100"],
-  unexpandedClass: ["ease-in", "duration-75", "opacity-0", "scale-95"],
+  expandedClass: ["ease-out", "duration-100", "opacity-100", "scale-100", "z-10"],
+  unexpandedClass: ["ease-in", "duration-75", "opacity-0", "scale-95", "-z-10"],
 };
 
 /* When the user clicks on the button,
@@ -146,6 +152,23 @@ const toggleDropDown = () => {
     dropdownList.setAttribute("aria-expanded", "false");
   }
 };
+
+// Seatch Bar
+
+const searchCountries = (e) => {
+  const searchCountriesName = e.target.value;
+  if (searchCountriesName !== "") {
+    console.log(searchCountriesName);
+    getapi(api_url + apiFetchList.searchByName + searchCountriesName);
+  }
+};
+
+const searchBar= document
+  .getElementById("search-bar")
+  .addEventListener("input", searchCountries);
+
+// const menutItems = document.querySelectorAll('[role="menuitem"]');
+// console.log(menutItems);
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {

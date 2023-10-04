@@ -133,7 +133,7 @@ const showData = (countries) => {
   // </div>
 };
 getapi(
-  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds,
+  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds
 );
 
 // the class name data on dropdown list toggle
@@ -182,21 +182,12 @@ const toggleDropDown = () => {
 // Region Menu Items
 const queryRegion = (e) => {
   const regionName = e.target.innerText;
-  if (regionName !== "Others") {
     getapi(
       api_url +
         apiFetchList.searchByRegion +
         regionName +
         apiFetchList.shortQueryFileds,
     );
-  } else {
-    getapi(
-      api_url +
-        apiFetchList.searchByRegion +
-        "Oceania" +
-        apiFetchList.shortQueryFileds,
-    );
-  }
   toggleDropDown();
 };
 
@@ -204,6 +195,41 @@ const menutItems = document.querySelectorAll('[role="menuitem"]');
 menutItems.forEach((item) => {
   item.addEventListener("click", queryRegion);
 });
+
+// let routes = {};
+// let templates = {};
+
+// function route(path, template) {
+//   if (typeof template === "function") {
+//     return (routes[path] = template);
+//   } else if (typeof template === "string") {
+//     return (routes[path] = templates[template]);
+//   } else {
+//     return;
+//   }
+// }
+
+// function template(name, templateFunction) {
+//   return (templates[name] = templateFunction);
+// }
+
+// function resolveRoute(route) {
+//   try {
+//     return routes[route];
+//   } catch (e) {
+//     throw new Error(`Route ${route} not found`);
+//   }
+// }
+
+// function router(evt) {
+//   let url = window.location.hash.slice(1) || "/";
+//   let route = resolveRoute(url);
+
+//   route();
+// }
+
+// window.addEventListener("load", router);
+// window.addEventListener("hashchange", router);
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {

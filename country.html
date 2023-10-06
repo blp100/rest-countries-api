@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon-32x32.png" />
+    <link href="/styles/output.css" rel="stylesheet" />
+    <script src="/country.js" defer></script>
+  </head>
+  <body class="bg-slate-100">
+    <header class="flex h-20 items-center bg-white px-20 drop-shadow-sm">
+      <h1 class="text-2xl font-semibold text-zinc-900">Where in the world?</h1>
+      <div class="flex-1"></div>
+      <button type="button">Dark Mode</button>
+    </header>
+    <nav class="mx-auto flex items-center px-20 py-12">
+      <form>
+        <button
+          class="rounded-l-full rounded-r-md bg-white px-4 py-2 hover:bg-zinc-200"
+          type="button"
+        >
+          <span class="mx-auto flex items-center justify-center gap-2.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M6.46447 4.10744L7.64298 5.28596L3.75389 9.17504L18.6031 9.17504L18.6031 10.825L3.75389 10.825L7.64298 14.714L6.46447 15.8926L0.57191 10L6.46447 4.10744Z"
+                fill="#111517"
+              />
+            </svg>
+            Back
+          </span>
+        </button>
+      </form>
+    </nav>
+    <section
+      class="mx-auto flex w-screen justify-center gap-32 px-20"
+      id="country-detail"
+    >
+      <div class="w-1/2 min-w-[20rem]">
+        <img src="https://flagcdn.com/cm.svg" />
+      </div>
+      <div class="mt-10 flex w-1/2 flex-col">
+        <h1 class="text-4xl font-bold">Belgium</h1>
+        <ul
+          class="mt-6 flex h-40 min-w-max flex-col flex-wrap text-base leading-8"
+        >
+          <li><span class="mr-1 font-semibold">Name:</span>België</li>
+          <li><span class="mr-1 font-semibold">Population:</span>11,319,511</li>
+          <li><span class="mr-1 font-semibold">Region:</span>Europe</li>
+          <li>
+            <span class="mr-1 font-semibold">Sub Region:</span>Western Europe
+          </li>
+          <li><span class="mr-1 font-semibold">Capital:</span>Brussels</li>
+          <li><span class="mr-1 font-semibold">Top Level Domain:</span>.be</li>
+          <li><span class="mr-1 font-semibold">Currencies:</span>Euro</li>
+          <li>
+            <span class="mr-1 font-semibold">Languages:</span>Dutch, French,
+            German
+          </li>
+        </ul>
+        <div class="mt-16">
+          <span class="my-2 block font-semibold">Border Countries:</span>
+          <div class="flex gap-2">
+            <button
+              class="rounded bg-white px-4 py-2 transition-colors hover:bg-zinc-200"
+              type="button"
+            >
+              France</button
+            ><button
+              class="rounded bg-white px-4 py-2 transition-colors hover:bg-zinc-200"
+              type="button"
+            >
+              Germany</button
+            ><button
+              class="rounded bg-white px-4 py-2 transition-colors hover:bg-zinc-200"
+              type="button"
+            >
+              Netherlands
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

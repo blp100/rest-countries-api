@@ -133,7 +133,7 @@ const showData = (countries) => {
   // </div>
 };
 getapi(
-  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds
+  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds,
 );
 
 // the class name data on dropdown list toggle
@@ -182,12 +182,12 @@ const toggleDropDown = () => {
 // Region Menu Items
 const queryRegion = (e) => {
   const regionName = e.target.innerText;
-    getapi(
-      api_url +
-        apiFetchList.searchByRegion +
-        regionName +
-        apiFetchList.shortQueryFileds,
-    );
+  getapi(
+    api_url +
+      apiFetchList.searchByRegion +
+      regionName +
+      apiFetchList.shortQueryFileds,
+  );
   toggleDropDown();
 };
 

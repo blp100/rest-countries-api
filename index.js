@@ -4,7 +4,7 @@ const apiFetchList = {
   searchAll: "all",
   searchByName: "name/",
   searchByRegion: "region/",
-  shortQueryFileds: "?fields=flags,name,population,region,capital",
+  shortQueryFileds: "?fields=flags,name,population,region,capital,cca3",
 };
 
 function removeAllChildNodes(parent) {
@@ -35,16 +35,17 @@ const showData = (countries) => {
   removeAllChildNodes(countryList);
 
   countries.map((country) => {
-    const { flags, name, population, region, capital } = country;
+    const { flags, name, population, region, capital, cca3 } = country;
     // country wrapper
-    const div = document.createElement("div");
-    div.classList.add(
+    const anchor = document.createElement("a");
+    anchor.classList.add(
       "h-[336px]",
       "w-full",
       "overflow-hidden",
       "rounded",
       "bg-white",
     );
+    anchor.href = "country.html?cca3=" + cca3;
 
     // flag
     const flagDiv = document.createElement("div");
@@ -61,8 +62,8 @@ const showData = (countries) => {
     );
     flagDiv.style.backgroundImage = `url(${flags.svg})`;
 
-    div.appendChild(flagDiv);
-    countryList.appendChild(div);
+    anchor.appendChild(flagDiv);
+    countryList.appendChild(anchor);
 
     // description wrapper
     const descriptionDiv = document.createElement("div");
@@ -71,7 +72,7 @@ const showData = (countries) => {
     // add country name tag
     const countryName = document.createElement("h2");
     countryName.classList.add("text-lg", "font-semibold");
-    countryName.textContent = name.official;
+    countryName.textContent = name.common;
 
     // add country deatil wrapper
     const countryDetailDiv = document.createElement("div");
@@ -98,7 +99,7 @@ const showData = (countries) => {
       } else if (deatilTitle === "Region") {
         paragraph.innerHTML += region;
       } else if (deatilTitle === "Capital") {
-        paragraph.innerHTML += capital != undefined ? capital[0] : "N/A";
+        paragraph.innerHTML += capital.length !== 0 ? capital[0] : "N/A";
       }
 
       countryDetailDiv.appendChild(paragraph);
@@ -106,12 +107,12 @@ const showData = (countries) => {
 
     descriptionDiv.appendChild(countryName);
     descriptionDiv.appendChild(countryDetailDiv);
-    div.append(descriptionDiv);
+    anchor.append(descriptionDiv);
   });
 
-  /* the country list boilplate */
+  /* the country list boilerplate */
 
-  // <div class="h-[336px] w-full overflow-hidden rounded bg-white">
+  // <a class="h-[336px] w-full overflow-hidden rounded bg-white">
   //   <div
   //     class="h-2/5 w-full items-center bg-contain bg-center bg-no-repeat p-2 hover:bg-contain md:bg-cover"
   //     style="background-image: url(https://flagcdn.com/as.svg)"
@@ -130,8 +131,9 @@ const showData = (countries) => {
   //       </div>
   //     </div>
   //   </div>
-  // </div>
+  // </a>
 };
+
 getapi(
   api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds,
 );
@@ -233,7 +235,7 @@ menutItems.forEach((item) => {
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
-  console.log(event.target);
+  console.log(event.target.matches("dropdown"));
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;

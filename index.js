@@ -4,15 +4,15 @@ const apiFetchList = {
   searchAll: "all",
   searchByName: "name/",
   searchByRegion: "region/",
-  shortQueryFileds: "?fields=flags,name,population,region,capital,cca3",
+  searchByCCA3: "alpha?codes=",
+  shortQueryFileds: "fields=flags,name,population,region,capital,cca3",
 };
 
-function removeAllChildNodes(parent) {
+const removeAllChildNodes = (parent) => {
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
-}
-
+};
 const getapi = async (url) => {
   // Storing response
   const response = await fetch(url);
@@ -20,10 +20,14 @@ const getapi = async (url) => {
   // Storing data in form of JSON
   var data = await response.json();
   console.log(data);
+  if (data.status) {
+    return data.message;
+  }
+
   if (response) {
     // hideloader();
   }
-  showData(data);
+  return data;
 };
 
 function hideloader() {
@@ -33,6 +37,26 @@ function hideloader() {
 const showData = (countries) => {
   const countryList = document.getElementById("country-list");
   removeAllChildNodes(countryList);
+
+  if (typeof countries === "string") {
+
+    const div = document.createElement("div");
+    div.classList.add(
+      "h-[336px]",
+      "w-full",
+      "flex",
+      "items-center",
+      "text-3xl",
+      "bg-zinc-200",
+      "opacity-50",
+      "text-center",
+      "rounded",
+      "p-4"
+    );
+    div.textContent = "This country is not on Earth.";
+    countryList.appendChild(div);
+    return;
+  }
 
   countries.map((country) => {
     const { flags, name, population, region, capital, cca3 } = country;
@@ -134,9 +158,16 @@ const showData = (countries) => {
   // </a>
 };
 
-getapi(
-  api_url + apiFetchList.searchByName + "amer" + apiFetchList.shortQueryFileds,
-);
+(async () => {
+  const data = await getapi(
+    api_url +
+      apiFetchList.searchByCCA3 +
+      "AUS,CAN,USA,SAU,IND,RUS,ZAF,TUR,ARG,BRA,MEX,FRA,DEU,ITA,GBR,CHN,IDN,JPN,KOR" +
+      "&" +
+      apiFetchList.shortQueryFileds,
+  );
+  showData(data);
+})();
 
 // the class name data on dropdown list toggle
 const dropDownClassList = {
@@ -154,12 +185,16 @@ const dropDownClassList = {
 const queryCountries = (e) => {
   const searchCountriesName = e.target.value;
   if (searchCountriesName !== "") {
-    getapi(
-      api_url +
-        apiFetchList.searchByName +
-        searchCountriesName +
-        apiFetchList.shortQueryFileds,
-    );
+    (async () => {
+      const data = await getapi(
+        api_url +
+          apiFetchList.searchByName +
+          searchCountriesName +
+          "?" +
+          apiFetchList.shortQueryFileds,
+      );
+      showData(data);
+    })();
   }
 };
 
@@ -184,12 +219,16 @@ const toggleDropDown = () => {
 // Region Menu Items
 const queryRegion = (e) => {
   const regionName = e.target.innerText;
-  getapi(
-    api_url +
-      apiFetchList.searchByRegion +
-      regionName +
-      apiFetchList.shortQueryFileds,
-  );
+  (async () => {
+    const data = await getapi(
+      api_url +
+        apiFetchList.searchByRegion +
+        regionName +
+        "?" +
+        apiFetchList.shortQueryFileds,
+    );
+    showData(data);
+  })();
   toggleDropDown();
 };
 
@@ -198,44 +237,9 @@ menutItems.forEach((item) => {
   item.addEventListener("click", queryRegion);
 });
 
-// let routes = {};
-// let templates = {};
-
-// function route(path, template) {
-//   if (typeof template === "function") {
-//     return (routes[path] = template);
-//   } else if (typeof template === "string") {
-//     return (routes[path] = templates[template]);
-//   } else {
-//     return;
-//   }
-// }
-
-// function template(name, templateFunction) {
-//   return (templates[name] = templateFunction);
-// }
-
-// function resolveRoute(route) {
-//   try {
-//     return routes[route];
-//   } catch (e) {
-//     throw new Error(`Route ${route} not found`);
-//   }
-// }
-
-// function router(evt) {
-//   let url = window.location.hash.slice(1) || "/";
-//   let route = resolveRoute(url);
-
-//   route();
-// }
-
-// window.addEventListener("load", router);
-// window.addEventListener("hashchange", router);
-
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
-  console.log(event.target.matches("dropdown"));
+  console.log(event.target);
   if (!event.target.matches(".dropbtn")) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;

@@ -31,11 +31,24 @@ window.addEventListener("load", () => {
         showData(data);
         return;
       })();
+    } else {
+      const countryDeatil = document.getElementById("country-detail");
+      removeAllChildNodes(countryDeatil);
+      const h1 = document.createElement("h1");
+      h1.classList.add("text-6xl");
+      h1.textContent = "Oops, it look likes your are in the outerspace.";
+      countryDeatil.appendChild(h1);
     }
   } catch (err) {
     console.log("Issues with Parsing URL Parameter's - " + err);
   }
 });
+
+const removeAllChildNodes = (parent) => {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+};
 
 const getapi = async (url) => {
   // Storing response

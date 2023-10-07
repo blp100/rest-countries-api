@@ -9,15 +9,19 @@
     <script src="/country.js" defer></script>
   </head>
   <body class="bg-slate-100">
-    <header class="flex h-20 items-center bg-white px-20 drop-shadow-sm">
-      <h1 class="text-2xl font-semibold text-zinc-900">Where in the world?</h1>
-      <div class="flex-1"></div>
-      <button type="button">Dark Mode</button>
+    <header
+      class="flex h-20 items-center bg-white px-4 drop-shadow-sm md:px-20"
+    >
+      <h1 class="text-sm font-semibold text-zinc-900 md:text-2xl">
+        Where in the world?
+      </h1>
+      <div class="hidden flex-1 md:block"></div>
+      <!-- <button type="button">Dark Mode</button> -->
     </header>
-    <nav class="mx-auto flex items-center px-20 py-12">
+    <nav class="flex px-4 pb-16 pt-10 md:mx-auto md:px-20 md:py-12">
       <form>
         <a
-          class="block rounded-l-full rounded-r-md bg-white pl-6 pr-4 py-2 hover:bg-zinc-200 transition-all group"
+          class="group block rounded-l-full rounded-r-md bg-white py-2 pl-6 pr-4 transition-all hover:bg-zinc-200"
           href="./"
         >
           <span class="mx-auto flex items-center justify-center gap-2.5">
@@ -27,7 +31,7 @@
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              class="group-hover:-translate-x-1 transition-transform duration-300"
+              class="transition-transform duration-300 group-hover:-translate-x-1"
             >
               <path
                 fill-rule="evenodd"
@@ -42,23 +46,24 @@
       </form>
     </nav>
     <section
-      class="mx-auto flex justify-center gap-32 px-20"
+      class="mx-auto flex flex-col justify-center gap-10 px-7 md:px-20 lg:flex-row lg:gap-32"
       id="country-detail"
     >
-      <div class="w-1/2 min-w-[20rem]">
+      <div class="lg:w-1/2 lg:min-w-[20rem]">
         <img id="flag" />
       </div>
-      <div class="mt-10 flex w-1/2 max-w-[50%] flex-col">
+      <div class="flex flex-col lg:mt-10 lg:w-1/2 lg:max-w-[50%]">
         <h1 id="country-name" class="text-4xl font-bold"></h1>
         <ul
-          class="mt-6 flex h-40 min-w-max flex-col flex-wrap text-base leading-8"
+          class="mt-4 flex h-full flex-col flex-wrap text-base leading-8 lg:mt-6 lg:h-40 lg:min-w-max"
           id="country-information"
-        >
-        </ul>
-        <div class="mt-16">
+        ></ul>
+        <div class="my-8 lg:mt-16">
           <span class="my-2 block font-semibold">Border Countries:</span>
-          <div id="border-countries" class="flex gap-2 max-w-full flex-wrap">
-          </div>
+          <div
+            id="border-countries"
+            class="flex max-w-full flex-wrap gap-2"
+          ></div>
         </div>
       </div>
     </section>

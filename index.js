@@ -19,7 +19,7 @@ const getapi = async (url) => {
 
   // Storing data in form of JSON
   var data = await response.json();
-  console.log(data);
+  // console.log(data);
   if (data.status) {
     return data.message;
   }
@@ -39,7 +39,6 @@ const showData = (countries) => {
   removeAllChildNodes(countryList);
 
   if (typeof countries === "string") {
-
     const div = document.createElement("div");
     div.classList.add(
       "h-[336px]",
@@ -51,7 +50,7 @@ const showData = (countries) => {
       "opacity-50",
       "text-center",
       "rounded",
-      "p-4"
+      "p-4",
     );
     div.textContent = "This country is not on Earth.";
     countryList.appendChild(div);
@@ -196,6 +195,9 @@ const queryCountries = (e) => {
       showData(data);
     })();
   }
+  menutItems.forEach((item) => {
+    item.classList.remove("bg-gray-100", "text-gray-900", "font-semibold");
+  });
 };
 
 const searchBar = document.getElementById("search-bar");
@@ -216,6 +218,8 @@ const toggleDropDown = () => {
   }
 };
 
+const menutItems = document.querySelectorAll('[role="menuitem"]');
+
 // Region Menu Items
 const queryRegion = (e) => {
   const regionName = e.target.innerText;
@@ -229,25 +233,27 @@ const queryRegion = (e) => {
     );
     showData(data);
   })();
+  menutItems.forEach((item) => {
+    item.classList.remove("bg-gray-100", "text-gray-900", "font-semibold");
+  });
+  e.target.classList.add("bg-gray-100", "text-gray-900", "font-semibold");
   toggleDropDown();
 };
 
-const menutItems = document.querySelectorAll('[role="menuitem"]');
 menutItems.forEach((item) => {
   item.addEventListener("click", queryRegion);
 });
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
-  console.log(event.target);
-  if (!event.target.matches(".dropbtn")) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains("show")) {
-        openDropdown.classList.remove("show");
-      }
-    }
+  if (
+    !(dropdowns = document
+      .getElementById("dropdown-menu")
+      .contains(event.target))
+  ) {
+    const dropdownList = document.getElementById("dropdown");
+    dropdownList.classList.remove(...dropDownClassList.expandedClass);
+    dropdownList.classList.add(...dropDownClassList.unexpandedClass);
+    dropdownList.setAttribute("aria-expanded", "false");
   }
 };

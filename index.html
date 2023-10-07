@@ -9,16 +9,22 @@
     <script src="/index.js" defer></script>
   </head>
   <body class="bg-slate-100">
-    <header class="flex h-20 items-center bg-white px-20 drop-shadow-sm">
-      <h1 class="text-2xl font-semibold text-zinc-900">Where in the world?</h1>
-      <div class="flex-1"></div>
-      <button type="button">Dark Mode</button>
+    <header
+      class="flex h-20 items-center bg-white px-4 drop-shadow-sm md:px-20"
+    >
+      <h1 class="text-sm font-semibold text-zinc-900 md:text-2xl">
+        Where in the world?
+      </h1>
+      <div class="hidden flex-1 md:block"></div>
+      <!-- <button type="button">Dark Mode</button> -->
     </header>
-    <nav class="mx-auto flex items-center px-20 py-12">
+    <nav
+      class="flex flex-col gap-4 px-4 py-6 md:mx-auto md:flex-row md:items-center md:gap-0 md:px-20 md:py-12"
+    >
       <form>
         <label
           for="default-search"
-          class="sr-only mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="sr-only text-sm font-medium text-gray-900 dark:text-white md:mb-2"
           >Search</label
         >
         <div class="relative">
@@ -44,41 +50,39 @@
           <input
             type="search"
             id="search-bar"
-            class="block rounded-lg border border-gray-300 bg-gray-50 p-4 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 md:w-[30rem]"
+            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 md:w-[30rem]"
             placeholder="Search for a country…"
             required
           />
         </div>
       </form>
-      <div class="flex-1"></div>
-      <div class="mx-auto w-64 text-right">
-        <div class="relative inline-block text-left">
-          <div>
-            <button
-              type="button"
-              class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-              id="menu-button"
-              aria-expanded="true"
-              aria-haspopup="true"
-              onclick="toggleDropDown()"
+      <div class="flex-1 hidden md:block"></div>
+      <div class="w-48 text-right md:mx-auto" id="dropdown-menu">
+        <div class="relative block text-left">
+          <button
+            type="button"
+            class="flex w-full justify-center gap-x-1.5 rounded-md bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            id="menu-button"
+            aria-expanded="true"
+            aria-haspopup="true"
+            onclick="toggleDropDown()"
+          >
+            Filter by Region
+            <svg
+              class="-mr-1 h-5 w-5 text-gray-400"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
             >
-              Filter by Region
-              <svg
-                class="-mr-1 h-5 w-5 text-gray-400"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                  clip-rule="evenodd"
-                />
-              </svg>
-            </button>
-          </div>
+              <path
+                fill-rule="evenodd"
+                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
           <div
-            class="absolute right-0 -z-10 mt-2 w-56 origin-top-right transform rounded-md bg-white opacity-0 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
+            class="absolute right-0 -z-10 mt-2 w-full origin-top-right transform rounded-md bg-white opacity-0 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="menu-button"
@@ -90,7 +94,7 @@
               <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
               <button
                 type="button"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block w-full px-4 py-2 text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-0"
@@ -99,7 +103,7 @@
               </button>
               <button
                 type="button"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block w-full px-4 py-2 text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-1"
@@ -108,7 +112,7 @@
               </button>
               <button
                 type="button"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block w-full px-4 py-2 text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-2"
@@ -117,7 +121,7 @@
               </button>
               <button
                 type="button"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block w-full px-4 py-2 text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-3"
@@ -126,7 +130,7 @@
               </button>
               <button
                 type="button"
-                class="block px-4 py-2 text-sm text-gray-700"
+                class="block w-full px-4 py-2 text-gray-700"
                 role="menuitem"
                 tabindex="-1"
                 id="menu-item-4"
